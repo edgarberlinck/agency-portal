@@ -1,5 +1,5 @@
 {
-  "name": "agency-portal-server",
+  "name": "content",
   "private": true,
   "version": "0.1.0",
   "description": "A Strapi application",
@@ -20,7 +20,7 @@
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "3f1a6fa2-4c2f-4b6d-8399-8415a4fd29e7"
+    "uuid": "8049b231-d73f-4a4d-be8b-831226128a7b"
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
