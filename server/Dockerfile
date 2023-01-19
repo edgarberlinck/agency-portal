@@ -2,9 +2,7 @@
 
 FROM octoblu/pnpm as base
 WORKDIR /home/node
-COPY --link ./ /home/node/app
-RUN chown -R node:node ./app
-USER node
+COPY ./ /home/node/app
 WORKDIR /home/node/app
 RUN pnpm install
 
@@ -19,8 +17,9 @@ ARG DATABASE_PASSWORD
 ARG DATABASE_SSL
 ARG ADMIN_JWT_SECRET
 ARG API_TOKEN_SALT
+ARG PORT=8000
 
-RUN JWT_SECRET=$JWT_SECRET DATABASE_HOST=$DATABASE_HOST DATABASE_PORT=$DATABASE_PORT DATABASE_NAME=$DATABASE_NAME DATABASE_USERNAME=$DATABASE_USERNAME DATABASE_PASSWORD=$DATABASE_PASSWORD DATABASE_SSL=$DATABASE_SSL ADMIN_JWT_SECRET=$ADMIN_JWT_SECRET API_TOKEN_SALT=$API_TOKEN_SALT pnpm build
+RUN JWT_SECRET=$JWT_SECRET DATABASE_HOST=$DATABASE_HOST DATABASE_PORT=$DATABASE_PORT DATABASE_NAME=$DATABASE_NAME DATABASE_USERNAME=$DATABASE_USERNAME DATABASE_PASSWORD=$DATABASE_PASSWORD DATABASE_SSL=$DATABASE_SSL ADMIN_JWT_SECRET=$ADMIN_JWT_SECRET API_TOKEN_SALT=$API_TOKEN_SALT PORT=$PORT pnpm build
 
 WORKDIR /home/node
 
@@ -28,14 +27,11 @@ WORKDIR /home/node
 
 FROM octoblu/pnpm
 
-ENV PORT=8000
 
 WORKDIR /home/node/app
 
-RUN chown -R node:node /home/node/app
-USER node
-COPY --link --from=builder /home/node/app/package.json ./package.json
-COPY --link --from=builder /home/node/app/dist/ ./dist/
-COPY --link --from=builder /home/node/app/node_modules/ ./node_modules/
+COPY --from=builder /home/node/app/package.json ./package.json
+COPY --from=builder /home/node/app/dist/ ./dist/
+COPY --from=builder /home/node/app/node_modules/ ./node_modules/
 
 CMD ["pnpm", "run", "start"]
