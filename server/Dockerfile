@@ -1,12 +1,11 @@
 # syntax=docker/dockerfile:1.4
 
-FROM node:18-alpine as base
+FROM octoblu/pnpm as base
 WORKDIR /home/node
 COPY --link ./ /home/node/app
 RUN chown -R node:node ./app
 USER node
 WORKDIR /home/node/app
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
 RUN pnpm install
 
 FROM base as builder
@@ -27,7 +26,7 @@ WORKDIR /home/node
 
 ##
 
-FROM node:18-alpine
+FROM octoblu/pnpm
 
 ENV PORT=8000
 
