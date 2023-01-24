@@ -48,7 +48,7 @@ export default function Home({ pages }: Props) {
       </Head>
       <main>
       <h1 className="text-3xl font-bold underline">
-        Hello world!
+        Available Pages
       </h1>
       { pages.map((page: StrapiPage) => 
         <span key={page.attributes.slug}>{page.attributes.title}</span>
