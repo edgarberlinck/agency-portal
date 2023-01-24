@@ -1,9 +1,43 @@
 import Head from 'next/head'
-// import { Inter } from '@next/font/google'
+import { GetStaticProps } from 'next'
+import { StrapiApiResponse, StrapiPage } from '@/common/types/strapi'
+import { getResource } from '@/server/strapi'
+import { RequestError, ServerProps } from '@/common/types/server'
 
-// const inter = Inter({ subsets: ['latin'] })
+interface Props extends ServerProps {
+  pages: StrapiPage[]
+}
 
-export default function Home() {
+export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
+  try {
+    const response: StrapiApiResponse<StrapiPage[]> | RequestError = await getResource<StrapiPage[]>('/pages')
+    
+    if ("data" in response) {
+      return {
+        props: {
+          pages: response.data
+        }
+      }
+    }
+    
+    return {
+      props: {
+        error: response,
+        pages: []
+      }
+    }
+  } catch(e) {
+    return {
+      props: {
+        pages: [],
+        error: { status: 500, message: 'Could not fetch the pages...' }
+      }
+    }
+  }
+
+}
+
+export default function Home({ pages }: Props) {
   return (
     <>
       <Head>
@@ -16,6 +50,9 @@ export default function Home() {
       <h1 className="text-3xl font-bold underline">
         Hello world!
       </h1>
+      { pages.map((page: StrapiPage) => 
+        <span key={page.attributes.slug}>{page.attributes.title}</span>
+      )}
       </main>
     </>
   )
