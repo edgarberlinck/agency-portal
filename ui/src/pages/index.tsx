@@ -1,39 +1,38 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
 import { StrapiApiResponse, StrapiPage } from '@/common/types/strapi'
-import { getResource } from '@/server/strapi'
-import { RequestError, ServerProps } from '@/common/types/server'
+import { getResource } from '@/lib/strapi'
+import { RequestError } from '@/common/types/resources'
+import { GeneralServerConfig } from '@/common/constants/server'
 
-interface Props extends ServerProps {
+interface Props {
   pages: StrapiPage[]
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
-  try {
-    const response: StrapiApiResponse<StrapiPage[]> | RequestError = await getResource<StrapiPage[]>('/pages')
-    
-    if ("data" in response) {
-      return {
-        props: {
-          pages: response.data
-        }
-      }
-    }
-    
+  const defaultPageConfig = {
+    revalidate: GeneralServerConfig.revalidationTime
+  }
+  
+  const response: StrapiApiResponse<StrapiPage[]> | RequestError = await getResource<StrapiPage[]>('/pages')
+  
+  if ("data" in response) {
     return {
+      ...defaultPageConfig,
       props: {
-        error: response,
-        pages: []
-      }
-    }
-  } catch(e) {
-    return {
-      props: {
-        pages: [],
-        error: { status: 500, message: 'Could not fetch the pages...' }
+        pages: response.data
       }
     }
   }
+  
+  return {
+    ...defaultPageConfig,
+    redirect: {
+      destination: '/500',
+      permanent: false
+    }
+  }
+
 
 }
 

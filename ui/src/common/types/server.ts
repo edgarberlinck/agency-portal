@@ -1,12 +1,5 @@
-export type ResourceConfiguration = {
-  populate: boolean
-}
+import { RequestError } from "./resources"
 
-export type RequestError = {
-  status: number
-  message: string
-}
-
-export interface ServerProps {
-  error?: RequestError
+export interface ServerConfig {
+  revalidationTime: number
 }

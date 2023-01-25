@@ -1,4 +1,4 @@
-import { RequestError, ResourceConfiguration } from "@/common/types/server"
+import { RequestError, ResourceConfiguration } from "@/common/types/resources"
 import { StrapiApiResponse } from "@/common/types/strapi"
 import { getErrorMessage } from "@/common/utils"
 
