@@ -14,17 +14,27 @@ export enum StrapiPageLocale {
   en
 }
 
-export type StrapiPageAttributes = {
-  title: string,
+
+export interface StrapiResource<T> {
+  id: number
+  attributes: T
+}
+
+interface StrapiBaseResource {
   createdAt: Date,
   updatedAt: Date,
   publishedAt: Date,
   locale: StrapiPageLocale,
-  slug: string,
-  defaultHomepage: boolean
 }
 
-export type StrapiPage = {
-  id: number,
-  attributes: StrapiPageAttributes
+export interface StrapiPageAttributes extends StrapiBaseResource {
+  title: string,
+  slug: string,
+  defaultHomepage: boolean,
+}
+
+export interface StrapiSeoConfig extends StrapiBaseResource {
+  title: string,
+  description: string,
+  keywords: string
 }

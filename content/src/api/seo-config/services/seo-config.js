@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * agency-info service
+ * seo-config service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::agency-info.agency-info');
+module.exports = createCoreService('api::seo-config.seo-config');

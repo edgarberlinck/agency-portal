@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * agency-info router
+ * seo-config router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::agency-info.agency-info');
+module.exports = createCoreRouter('api::seo-config.seo-config');
