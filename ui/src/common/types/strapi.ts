@@ -1,3 +1,5 @@
+import { StrapiBlock } from "./strapiBlockComponents"
+
 export type StrapiApiResponse<T> = {
   data: T
   meta?: {
@@ -31,6 +33,7 @@ export interface StrapiPageAttributes extends StrapiBaseResource {
   title: string,
   slug: string,
   defaultHomepage: boolean,
+  blocks?: StrapiBlock[]
 }
 
 export interface StrapiSeoConfig extends StrapiBaseResource {

@@ -24,22 +24,6 @@
       },
       "type": "string"
     },
-    "hero": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "blocks": {
       "pluginOptions": {
         "i18n": {
@@ -48,9 +32,8 @@
       },
       "type": "dynamiczone",
       "components": [
-        "page.request-quote",
-        "page.services-offered",
-        "page.section"
+        "components.heading",
+        "components.hero"
       ]
     },
     "slug": {

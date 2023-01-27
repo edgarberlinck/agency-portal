@@ -1,15 +1,15 @@
 {
-  "collectionName": "components_general_components_services_offereds",
+  "collectionName": "components_components_heroes",
   "info": {
-    "displayName": "servicesOffered",
+    "displayName": "hero",
     "description": ""
   },
   "options": {},
   "attributes": {
-    "name": {
+    "title": {
       "type": "string"
     },
-    "icon": {
+    "image": {
       "type": "media",
       "multiple": false,
       "required": false,
@@ -20,11 +20,8 @@
         "audios"
       ]
     },
-    "small_description": {
-      "type": "string"
-    },
     "description": {
-      "type": "richtext"
+      "type": "text"
     }
   }
 }
