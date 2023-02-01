@@ -7,8 +7,6 @@ interface Props {
 }
 
 export default function Hero ({ description, title, image }: Props) {
-  console.log(process.env.NEXT_PUBLIC_MEDIA_PATH)
-  console.log(image.data?.attributes.formats)
   return <div>
     <h1>{title}</h1>
     <p>{description}</p>
