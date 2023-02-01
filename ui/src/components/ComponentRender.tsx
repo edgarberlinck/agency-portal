@@ -7,16 +7,16 @@ interface Props {
 }
 
 const Components = {
-  Heading: 'components.heading',
-  Hero: 'components.hero'
+  Heading: 'ComponentComponentsHeading',
+  Hero: 'ComponentComponentsHero'
 }
 
 export default function ComponentRender({component}: Props) {
-  switch(component.__component) {
+  switch(component.__typename) {
     case Components.Heading:
       return <Heading />
     case Components.Hero:
-      return <Hero description={component["description"]} title={component["title"]} />
+      return <Hero description={component["description"]} title={component["title"]} image={component["image"] ?? null} />
     default:
       return <></>
   }

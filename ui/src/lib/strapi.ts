@@ -4,6 +4,12 @@ import { getErrorMessage } from "@/common/utils"
 
 const HTTP_STATUS_OK = [200, 201]
 
+/**
+ * getResources from the REST API
+ * 
+ * @deprecated
+ * @see strapyGraphQL.ts 
+ */
 export async function getResource<T>(resourceUri: string, config?: ResourceConfiguration): Promise<StrapiApiResponse<T> | RequestError>  {
   const strapiApiToken = process.env.STRAPI_API_ACCESS
   const stripiUri = process.env.STRAPI_URI

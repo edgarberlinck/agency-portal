@@ -5,6 +5,7 @@ import { getResource } from '@/lib/strapi'
 import { RequestError, ResourceConfiguration } from '@/common/types/resources'
 import { GeneralServerConfig } from '@/common/constants/server'
 import ComponentRender from '@/components/ComponentRender'
+import { queryResource } from '@/lib/strapiGraphQL'
 
 interface Props {
   pages: StrapiResource<StrapiPageAttributes>[]
@@ -28,21 +29,21 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   }
   
   try {
-    const pages = await fetchResource<StrapiResource<StrapiPageAttributes>[]>('/pages')
-    const seoConfig = await fetchResource<StrapiResource<StrapiSeoConfig>>('/seo-config')
-    const initialPageInfo = pages.data?.find(page => page.attributes.defaultHomepage)
+    const seoConfig = await queryResource<StrapiResource<StrapiSeoConfig>>('seoConfig')
+    const pages = await queryResource<StrapiResource<StrapiPageAttributes>[]>('pages')
+    const initialPageInfo = pages?.find(page => page.attributes.defaultHomepage)
     
     let homePage = undefined
     if (initialPageInfo) {
-      const data = await fetchResource<StrapiResource<StrapiPageAttributes>>(`/pages/${initialPageInfo.id}`, { populate: true })
-      homePage = data.data
+      const data = await queryResource<StrapiResource<StrapiPageAttributes>>('page', { id: initialPageInfo.id })
+      homePage = data
     }
 
     return {
       ...defaultPageConfig,
       props: {
-        pages: pages.data,
-        seo: seoConfig.data,
+        pages: pages,
+        seo: seoConfig,
         homePage
       },
     }
@@ -58,6 +59,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 }
 
 export default function Home({ pages, seo, homePage }: Props) {
+  console.log(homePage)
   return (
     <>
       <Head>
