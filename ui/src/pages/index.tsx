@@ -6,6 +6,7 @@ import { RequestError, ResourceConfiguration } from '@/common/types/resources'
 import { GeneralServerConfig } from '@/common/constants/server'
 import ComponentRender from '@/components/ComponentRender'
 import { queryResource } from '@/lib/strapiGraphQL'
+import { usePageStore } from '@/store/pagesStore'
 
 interface Props {
   pages: StrapiResource<StrapiPageAttributes>[]
@@ -42,7 +43,7 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
     return {
       ...defaultPageConfig,
       props: {
-        pages: pages,
+        pages: pages.filter(page => !page.attributes.defaultHomepage),
         seo: seoConfig,
         homePage
       },
@@ -59,7 +60,11 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
 }
 
 export default function Home({ pages, seo, homePage }: Props) {
-  console.log(homePage)
+  usePageStore.setState({
+    homePage,
+    pages
+  })
+
   return (
     <>
       <Head>

@@ -1,5 +1,4 @@
 import { StrapiImage } from "@/common/types/strapi"
-
 interface Props {
   description: string
   title: string

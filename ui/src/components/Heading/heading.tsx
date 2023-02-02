@@ -1,5 +1,6 @@
 import { usePageStore } from "@/store/pagesStore"
 import { Inter } from '@next/font/google'
+import Link from "next/link"
 
 const brandFont = Inter({ weight: "400", subsets: ['latin'] })
 
@@ -10,11 +11,11 @@ export default function Heading () {
     <div className="max-w-7xl px-1">
       <div className="flex items-center py-5 px-2 justify-start sm:space-x-5 text-black dark:text-white">
         <div className="flex justify-start lg:w-0 lg:flex-1">
-          <a href="/">
+          <Link href='/'>
             {/* TODO: Should come from Strapi */}
             <span className="sr-only">edgarberlinck.com</span>
             <span className={`${brandFont.className} md:text-2xl sm:text-xl hover:underline`}>edgarberlinck.com</span>
-          </a>
+          </Link>
         </div>
         
         { pages?.map((page) => (
