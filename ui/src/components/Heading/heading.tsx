@@ -1,8 +1,8 @@
 import { usePageStore } from "@/store/pagesStore"
-import { Inter } from '@next/font/google'
+import { Kanit } from '@next/font/google'
 import Link from "next/link"
 
-const brandFont = Inter({ weight: "400", subsets: ['latin'] })
+const brandFont = Kanit({ weight: "400", subsets: ['latin'] })
 
 export default function Heading () {
   const pages = usePageStore(store => store.pages)
