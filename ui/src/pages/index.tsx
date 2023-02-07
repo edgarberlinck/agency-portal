@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { StrapiApiResponse, StrapiResource, StrapiPageAttributes, StrapiSeoConfig } from '@/common/types/strapi'
-import { getResource } from '@/lib/strapi'
-import { RequestError, ResourceConfiguration } from '@/common/types/resources'
+import { StrapiResource, StrapiPageAttributes, StrapiSeoConfig } from '@/common/types/strapi'
 import { GeneralServerConfig } from '@/common/constants/server'
 import ComponentRender from '@/components/ComponentRender'
 import { queryResource } from '@/lib/strapiGraphQL'
@@ -12,16 +10,6 @@ interface Props {
   pages: StrapiResource<StrapiPageAttributes>[]
   seo: StrapiResource<StrapiSeoConfig>
   homePage: StrapiResource<StrapiPageAttributes> | undefined
-}
-
-async function fetchResource<T>(resource: string, config?: ResourceConfiguration): Promise<StrapiApiResponse<T>> {
-  const response: StrapiApiResponse<T> | RequestError = await getResource<T>(resource, config)
-  
-  if ("data" in response) {
-    return response
-  }
-
-  throw new Error(response.message)
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
