@@ -11,6 +11,7 @@ Before anything you need a mysql database and after that get yourself familiar w
 ### Running the server
 
 > yarn # donwload the dependencies
+
 > yarn develop # start strapi
 
 In the first run you definietly need to setup your strapi app and create an API key to access your data. With the api key on your hands you need to put it in your `.env.local` file at your `ui` folder. Additionaly is necessary to create an .env file with the following contents:
@@ -38,6 +39,7 @@ STRAPI_API_ACCESS=the api key that you just generate
 After that, you just need to:
 
 > yarn
+
 > yarn dev
 
 Happy hacking!
