@@ -6,7 +6,6 @@ const brandFont = Kanit({ weight: "400", subsets: ['latin'] })
 
 export default function Heading () {
   const pages = usePageStore(store => store.pages)
-  console.log(pages)
 
   return <div className="relative bg-slate-200 dark:bg-slate-900">
     <div className="max-w-7xl px-1">
