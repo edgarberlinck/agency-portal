@@ -33,7 +33,8 @@
       "type": "dynamiczone",
       "components": [
         "components.hero",
-        "components.heading"
+        "components.heading",
+        "components.blog-post-list"
       ]
     },
     "slug": {
