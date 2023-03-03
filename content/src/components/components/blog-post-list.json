@@ -1,11 +1,12 @@
 {
   "collectionName": "components_components_blog_post_lists",
   "info": {
-    "displayName": "BlogPostList"
+    "displayName": "BlogPostList",
+    "description": ""
   },
   "options": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string"
     },
     "display": {

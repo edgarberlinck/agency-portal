@@ -9,6 +9,7 @@ query page ($id: ID) {
         defaultHomepage
         blocks {
         	__typename
+          
           ... on ComponentComponentsHero {
             title
             description
@@ -24,6 +25,12 @@ query page ($id: ID) {
               }
             }
           }
+
+          ... on ComponentComponentsBlogPostList {
+            title
+            display
+          }
+
         }
       }
     }
