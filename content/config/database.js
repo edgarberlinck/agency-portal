@@ -8,6 +8,7 @@ module.exports = ({ env }) => ({
       user: env('DATABASE_USERNAME', 'portal'),
       password: env('DATABASE_PASSWORD', 'portal'),
       ssl: env.bool('DATABASE_SSL', false),
+      socketPath: env('INSTANCE_CONNECTION_NAME', '')
     },
   },
 });
