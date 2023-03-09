@@ -52,7 +52,7 @@ export default function Home({ pages, seo, homePage }: Props) {
     homePage,
     pages
   })
-
+  
   return (
     <>
       <Head>

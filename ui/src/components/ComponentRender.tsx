@@ -1,6 +1,7 @@
 import { StrapiBlock } from "@/common/types/strapiBlockComponents";
 import Heading from "./Heading/heading";
 import Hero from "./Hero/hero";
+import BlogPostList from "./BlogPostList/BlogPostList";
 
 interface Props {
   component: StrapiBlock
@@ -8,7 +9,8 @@ interface Props {
 
 const Components = {
   Heading: 'ComponentComponentsHeading',
-  Hero: 'ComponentComponentsHero'
+  Hero: 'ComponentComponentsHero',
+  ComponentComponentsBlogPostList: 'ComponentComponentsBlogPostList'
 }
 
 export default function ComponentRender({component}: Props) {
@@ -17,6 +19,8 @@ export default function ComponentRender({component}: Props) {
       return <Heading />
     case Components.Hero:
       return <Hero description={component["description"]} title={component["title"]} image={component["image"] ?? null} />
+    case Components.ComponentComponentsBlogPostList:
+      return <BlogPostList title={component['title']} display={component["display"]} />
     default:
       return <></>
   }

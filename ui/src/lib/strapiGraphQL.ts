@@ -1,7 +1,7 @@
 import { pageQuery } from '@/queries/page';
 import { pagesQuery } from '@/queries/pages';
 import seoQuery from '@/queries/seoConfig';
-import { ApolloClient, DocumentNode, InMemoryCache, createHttpLink, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 const httpLink = createHttpLink({
