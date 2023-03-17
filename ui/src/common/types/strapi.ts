@@ -36,6 +36,11 @@ export interface StrapiPageAttributes extends StrapiBaseResource {
   blocks?: StrapiBlock[]
 }
 
+export interface StrapiBlogPost extends StrapiBaseResource {
+  title: string,
+  content?: string,
+}
+
 export interface StrapiSeoConfig extends StrapiBaseResource {
   title: string,
   description: string,

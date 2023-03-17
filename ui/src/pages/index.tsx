@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GetStaticProps } from 'next'
-import { StrapiResource, StrapiPageAttributes, StrapiSeoConfig } from '@/common/types/strapi'
+import { StrapiResource, StrapiPageAttributes, StrapiSeoConfig, StrapiBlogPost } from '@/common/types/strapi'
 import { GeneralServerConfig } from '@/common/constants/server'
 import ComponentRender from '@/components/ComponentRender'
 import { queryResource } from '@/lib/strapiGraphQL'
@@ -10,6 +10,7 @@ interface Props {
   pages: StrapiResource<StrapiPageAttributes>[]
   seo: StrapiResource<StrapiSeoConfig>
   homePage: StrapiResource<StrapiPageAttributes> | undefined
+  blogPosts: StrapiResource<StrapiBlogPost>[] | undefined
 }
 
 export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
@@ -20,6 +21,8 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   try {
     const seoConfig = await queryResource<StrapiResource<StrapiSeoConfig>>('seoConfig')
     const pages = await queryResource<StrapiResource<StrapiPageAttributes>[]>('pages')
+    const blogPosts = await queryResource<StrapiResource<StrapiBlogPost>[]>('blogPosts')
+
     const initialPageInfo = pages?.find(page => page.attributes.defaultHomepage)
     
     let homePage = undefined
@@ -33,7 +36,8 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
       props: {
         pages: pages.filter(page => !page.attributes.defaultHomepage),
         seo: seoConfig,
-        homePage
+        homePage,
+        blogPosts
       },
     }
   } catch (e) {
@@ -47,10 +51,11 @@ export const getStaticProps: GetStaticProps<Props> = async (ctx) => {
   }
 }
 
-export default function Home({ pages, seo, homePage }: Props) {
+export default function Home({ pages, seo, homePage, blogPosts }: Props) {
   usePageStore.setState({
     homePage,
-    pages
+    pages,
+    blogPosts
   })
   
   return (

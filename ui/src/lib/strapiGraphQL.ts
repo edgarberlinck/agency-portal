@@ -1,3 +1,4 @@
+import { blogPostsQuery } from '@/queries/blogPosts';
 import { pageQuery } from '@/queries/page';
 import { pagesQuery } from '@/queries/pages';
 import seoQuery from '@/queries/seoConfig';
@@ -29,12 +30,14 @@ type Resource = {
   seoConfig: string
   pages: string
   page: string
+  blogPosts: string
 }
 
 const resourceMapping: Resource = {
   seoConfig: seoQuery,
   pages: pagesQuery,
-  page: pageQuery
+  page: pageQuery,
+  blogPosts: blogPostsQuery
 }
 ////////
 
