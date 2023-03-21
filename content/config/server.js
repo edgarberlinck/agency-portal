@@ -4,5 +4,5 @@ module.exports = ({ env }) => ({
   app: {
     keys: env.array('APP_KEYS'),
   },
-  url: env("PUBLIC_URL", "https://agency-portal-xttzpgwa7q-uc.a.run.app")
+  url: env("PUBLIC_URL", "http://localhost:1337")
 });
